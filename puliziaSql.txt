@@ -1,0 +1,13 @@
+-- CREO UNA COLONNA PER CAMBIARE TIPO DI DATO
+USE new_schem;
+ALTER TABLE reatispia
+ADD COLUMN anno DATE;
+-- disattivo il safeupdate mode
+SET SQL_SAFE_UPDATES = 0;
+-- AGGIORNO
+UPDATE reatispia
+SET anno = STR_TO_DATE(CONCAT('01/01/', CAST(dati AS CHAR)), '%d/%m/%Y');
+
+-- Elimino la colonna che non mi serve più
+ALTER TABLE reatispia
+DROP COLUMN dati;
